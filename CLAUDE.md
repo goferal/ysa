@@ -33,6 +33,7 @@ Target phrases: Kibbe, Kibbe body types, Kibbe body type analysis, Kibbe <type> 
 - **Change the booking form:** `site.config.bookingUrl`. Each service can override with its own `bookingUrl`.
 
 ## Build & deploy
+The GitHub Pages workflow builds with `BASE_PATH=/ysa` so the preview works at goferal.github.io/ysa/. When the real domain is pointed at Pages, remove that env line from `.github/workflows/deploy.yml` and add the domain under Settings → Pages → Custom domain.
 `npm install`, `npm run build` → static site in `out/`. GitHub Actions (`.github/workflows/deploy.yml`) builds and publishes to GitHub Pages on every push to `main`. Point the domain at Pages, or deploy `out/` anywhere static (Netlify, Vercel, Cloudflare).
 
 ## Before launch (TODOs)

@@ -13,7 +13,7 @@ export function Nav() {
   return (
     <header className="relative z-10 mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-3 px-6 pt-6 md:px-10">
       <Link href="/" className="block" aria-label="Your Style Archetype, home">
-        <img src="/logo-nav.png" alt="YSA · Your Style Archetype" width={464} height={193} className="h-14 w-auto md:h-16" />
+        <img src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/logo-nav.png`} alt="YSA · Your Style Archetype" width={464} height={193} className="h-14 w-auto md:h-16" />
       </Link>
       <nav aria-label="Main">
         <ul className="flex flex-wrap gap-x-7 gap-y-2 font-body text-[15px] tracking-wide text-soft">
@@ -46,7 +46,7 @@ export function Footer() {
       <Squiggle className="mb-10 h-4 w-full max-w-xs text-ink/40" />
       <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-8">
         <div className="max-w-md">
-          <img src="/logo.png" alt="YSA · Your Style Archetype" width={1858} height={774} className="h-14 w-auto" />
+          <img src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/logo.png`} alt="YSA · Your Style Archetype" width={1858} height={774} className="h-14 w-auto" />
           <p className="mt-4 text-soft">{site.tagline}</p>
           <p className="mt-5 font-hand text-2xl text-ink/80">
             Dress like yourself. It suits you.
