@@ -5,7 +5,7 @@ import { Squiggle } from '@/components/Sketches';
 
 export const metadata: Metadata = {
   title: 'What we need from you before a consult',
-  description: 'The photos and answers I need for a Kibbe body type, color season, or style essences analysis.',
+  description: 'The photos and answers we need for a Kibbe body type, color season, or style essences analysis.',
 };
 
 const sets = [

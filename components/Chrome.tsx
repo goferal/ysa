@@ -111,13 +111,18 @@ export function Cta({
     tone === 'ink'
       ? 'bg-ink text-mist hover:bg-soft'
       : 'bg-transparent text-ink ring-1 ring-ink/25 hover:ring-ink hover:text-soft';
+  const className = `inline-flex items-center gap-2 rounded-full px-6 py-3 font-body text-[15px] font-medium tracking-wide transition-colors ${cls}`;
+  // Internal links go through <Link> so they pick up basePath (the /ysa preview), like the nav does.
+  if (href.startsWith('/')) {
+    return (
+      <Link href={href} className={className}>
+        {children}
+      </Link>
+    );
+  }
   const props = external ? { target: '_blank', rel: 'noreferrer' } : {};
   return (
-    <a
-      href={href}
-      {...props}
-      className={`inline-flex items-center gap-2 rounded-full px-6 py-3 font-body text-[15px] font-medium tracking-wide transition-colors ${cls}`}
-    >
+    <a href={href} {...props} className={className}>
       {children}
     </a>
   );

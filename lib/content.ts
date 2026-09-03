@@ -111,9 +111,13 @@ export function getFashionGuide(slug: string) {
   return getFashionGuides().find((g) => g.slug === slug);
 }
 
+/** Set by next.config.mjs from BASE_PATH (the /ysa Pages preview); empty on the real domain. */
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+
 export async function renderMarkdown(md: string) {
   const out = await remark().use(html, { sanitize: false }).process(md);
-  return String(out);
+  // <Link> adds basePath to JSX links; root-relative links written in markdown need it added here.
+  return String(out).replace(/(href|src)="\/(?!\/)/g, `$1="${basePath}/`);
 }
 
 export function formatDate(iso: string) {
