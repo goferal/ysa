@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getPosts, formatDate } from '@/lib/content';
-import { Washes } from '@/components/Chrome';
 import { Thread } from '@/components/Sketches';
 
 export const metadata: Metadata = {
@@ -13,7 +12,6 @@ export default function Blog() {
   const posts = getPosts();
   return (
     <div className="relative overflow-hidden">
-      <Washes variant="quiet" />
       <section className="mx-auto max-w-6xl px-6 pb-8 pt-16 md:px-10 md:pt-24">
         <div className="grid items-end gap-10 md:grid-cols-[1.3fr_0.7fr]">
           <div>

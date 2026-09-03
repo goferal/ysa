@@ -9,7 +9,7 @@ Static Next.js site for yourstylearchetype.com. Everything is content-driven; th
 - `content/fashion/*.md` — fashion guides, the changing seasonal ones (wedding guest, fall edit). Same front-matter minus `category`. `_fall-fashion-guide.md` is a draft showing the format.
 - `app/prepare/page.tsx` — the "what we need from you" photo instructions.
 - `app/services/[slug]/page.tsx` — one SEO page per service, generated from `site.config.ts` (`seoTitle` is the <title>).
-- `components/Sketches.tsx` — hand-drawn SVG illustrations. `components/Magazine.tsx` — the magazine covers.
+- `components/Sketches.tsx` — hand-drawn SVG illustrations. `components/Magazine.tsx` — the magazine covers and the fan of them. `components/Quiz.tsx` — the four-question archetype quiz on the homepage. `components/Chrome.tsx` — masthead nav, footer, kicker, ticker, sheet/card classes, the pill button.
 
 ## Voice
 Warm, fun, positive, personal, a little quirky. The company says **we / our** (founder plus two helpers), never "I". Lead with "Confused about your style? Let us help." and "based on you, not trends." Always describe Your Style Archetype as *the trio of your Kibbe body type, style essences, and color season*; it is the coined term and the brand.
@@ -18,11 +18,13 @@ Warm, fun, positive, personal, a little quirky. The company says **we / our** (f
 Target phrases: Kibbe, Kibbe body types, Kibbe body type analysis, Kibbe <type> (all 10), color analysis, online color analysis, <season> color palette, Kitchener style essences, <essence> style essence, style archetypes, style guides, fashion guides, image consultant / online image consulting. Blog posts should each own one of these in the title and first paragraph. Every guide and service already has a keyword title.
 
 ## Design rules (keep these)
-- Brand colors: #ffe5e5 (blush) and #4b1212 (maroon). Everything else in `tailwind.config.ts` derives from them.
-- Warm, airy, hand-made. Drifting color washes, ink sketches, Caveat handwriting for asides.
-- No cards, no boxes, no left borders. Separate sections with space and the Squiggle divider.
-- Fonts: Bodoni Moda (display, chosen to match the high-contrast serif in the logo), Karla (body), Caveat (handwriting, used sparingly for asides). Colors in `tailwind.config.ts`.
-- The only button shape is the rounded pill (`Cta`).
+- Brand colors: #ffe5e5 (blush) and #4b1212 (maroon), on paper white. Everything else in `tailwind.config.ts` derives from them.
+- Editorial, like a fashion magazine: a centered masthead with a ruled nav, numbered uppercase kickers (`Kicker`) with hairline rules between sections, white "sheets" (`sheet`) that read as printed pages for the consult contents and the quiz, one full-bleed maroon band (the handbooks), and the ticker strip of cover lines. The ground is warm paper white; blush is an accent (covers, the ticker, text on the maroon band), never a background wash. Ink sketches and a little Caveat handwriting stay.
+- Copy is scarce. Homepage sections get one headline and at most one line; no paragraphs. Big type does the talking.
+- Fonts: Abril Fatface for display (bold Didone that reads at any size; Bodoni Moda was too hairline on the live site), Karla for body and kickers, Caveat for asides. Never set a weight above 400 on `font-display`; the face has one weight and heavier only fakes it.
+- Products on inner pages sit in soft white cards (`card`). Nothing else gets a box or a left border; horizontal hairline rules are the editorial idiom and are fine.
+- The only button shape is the rounded pill (`Cta`, tones `ink` / `soft` / `blush`).
+- The quiz (`components/Quiz.tsx`) gives a hunch that points at a consult, never a verdict. Keep the "not an analysis" line.
 
 ## Common tasks
 - **New post:** add `content/posts/my-post.md` with front-matter, commit, push. Done.

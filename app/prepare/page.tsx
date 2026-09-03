@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { site } from '@/site.config';
-import { Washes } from '@/components/Chrome';
 import { Squiggle } from '@/components/Sketches';
 
 export const metadata: Metadata = {
@@ -42,7 +41,6 @@ const sets = [
 export default function Prepare() {
   return (
     <div className="relative overflow-hidden">
-      <Washes variant="quiet" />
       <section className="mx-auto max-w-6xl px-6 pb-8 pt-16 md:px-10 md:pt-24">
         <p className="font-hand text-2xl text-ink/80">before we start</p>
         <h1 className="mt-3 max-w-3xl font-display text-[2.3rem] leading-[1.05] md:text-[3.3rem] [text-wrap:balance]">

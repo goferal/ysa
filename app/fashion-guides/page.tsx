@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { site } from '@/site.config';
 import { getFashionGuides } from '@/lib/content';
-import { Washes, Cta } from '@/components/Chrome';
+import { Cta, card } from '@/components/Chrome';
 import { MagazineCover } from '@/components/Magazine';
 import { Hanger } from '@/components/Sketches';
 
@@ -15,7 +15,6 @@ export default function FashionGuides() {
   const guides = getFashionGuides();
   return (
     <div className="relative overflow-hidden">
-      <Washes variant="quiet" />
       <section className="mx-auto max-w-6xl px-6 pb-6 pt-14 md:px-10 md:pt-20">
         <div className="grid items-end gap-10 md:grid-cols-[1.3fr_0.7fr]">
           <div>
@@ -50,7 +49,7 @@ export default function FashionGuides() {
         ) : (
           <ul className="grid gap-12 md:grid-cols-2 md:gap-x-16">
             {guides.map((g, i) => (
-              <li key={g.slug} className="flex gap-7">
+              <li key={g.slug} className={`${card} flex gap-7`}>
                 <Link href={`/fashion-guides/${g.slug}/`} className={`w-32 shrink-0 text-[11px] ${i % 2 ? 'rotate-2' : '-rotate-2'}`}>
                   <MagazineCover guide={g} index={i + 2} />
                 </Link>

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { site, services, formatPrice } from '@/site.config';
-import { Washes, Cta } from '@/components/Chrome';
+import { Cta, card } from '@/components/Chrome';
 import { Hanger, Squiggle, Star } from '@/components/Sketches';
 
 export const metadata: Metadata = {
@@ -15,7 +15,6 @@ export default function Services() {
   const rest = services.filter((s) => !s.popular);
   return (
     <div className="relative overflow-hidden">
-      <Washes variant="quiet" />
       <section className="mx-auto max-w-6xl px-6 pb-6 pt-14 md:px-10 md:pt-20">
         <div className="grid items-end gap-10 md:grid-cols-[1.3fr_0.7fr]">
           <div>
@@ -65,7 +64,7 @@ export default function Services() {
 
 function Row({ s, compact }: { s: (typeof services)[number]; compact?: boolean }) {
   return (
-    <article id={s.slug} className="scroll-mt-24">
+    <article id={s.slug} className={`${card} scroll-mt-24`}>
       {s.popular && (
         <p className="mb-1 flex items-center gap-2 font-hand text-xl text-ink/80">
           <Star className="w-5 text-honey" /> most people start here

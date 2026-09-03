@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --mist: #fff3f3;
+  --mist: #fffdfb; /* paper: warm white. Blush is an accent now, not the ground. */
   --ink: #4b1212;
 }
 
@@ -18,30 +18,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Soft washes of color that drift behind the page. Blurred, not boxed. */
-.wash {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(70px);
-  opacity: 0.75;
-  pointer-events: none;
-  will-change: transform;
-  animation: drift 26s ease-in-out infinite alternate;
-}
-.wash-blush { background: #ffe5e5; }
-.wash-lilac { background: #f1ddeb; }
-.wash-sky   { background: #ffc9c9; }
-.wash-honey { background: #fff0d2; }
-.wash:nth-child(2) { animation-duration: 34s; animation-delay: -8s; }
-.wash:nth-child(3) { animation-duration: 40s; animation-delay: -16s; }
-
-@keyframes drift {
-  from { transform: translate3d(0, 0, 0) scale(1); }
-  to   { transform: translate3d(4vw, -3vh, 0) scale(1.08); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .wash { animation: none; }
   html { scroll-behavior: auto; }
 }
 
@@ -85,6 +62,35 @@ body {
   padding-bottom: 0.2em;
 }
 
+/* Magazine kicker: small caps-style label. Used for section numbers, the nav, and the ticker. */
+.kicker {
+  font-family: Karla, system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* Cover lines sliding across a maroon strip. Two identical tracks make the loop seamless. */
+.ticker {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker__track {
+  display: flex;
+  flex-shrink: 0;
+  gap: 2rem;
+  padding-right: 2rem;
+  animation: ticker 48s linear infinite;
+}
+@keyframes ticker {
+  to { transform: translateX(-100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track { animation: none; }
+}
+
 /* Long-form text (blog posts, guide descriptions). */
 .prose-ysa {
   max-width: 66ch;
@@ -92,17 +98,17 @@ body {
   line-height: 1.75;
 }
 .prose-ysa h2 {
-  font-family: 'Bodoni Moda', 'Bodoni 72', Didot, Georgia, serif;
-  font-weight: 500;
+  font-family: 'Abril Fatface', 'Bodoni 72', Georgia, serif;
+  font-weight: 400;
   font-size: 2rem;
   line-height: 1.15;
   margin: 2.4em 0 0.6em;
   text-wrap: balance;
 }
 .prose-ysa h3 {
-  font-family: 'Bodoni Moda', 'Bodoni 72', Didot, Georgia, serif;
+  font-family: Karla, system-ui, sans-serif;
   font-weight: 600;
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   margin: 1.8em 0 0.4em;
 }
 .prose-ysa p { margin: 0 0 1.2em; }
@@ -111,10 +117,9 @@ body {
 .prose-ysa li::marker { color: #4b1212; }
 .prose-ysa a { color: #4b1212; text-decoration: underline; text-underline-offset: 3px; }
 .prose-ysa blockquote {
-  font-family: 'Bodoni Moda', 'Bodoni 72', Didot, Georgia, serif;
+  font-family: 'Abril Fatface', 'Bodoni 72', Georgia, serif;
   font-size: 1.5rem;
-  font-style: italic;
-  line-height: 1.35;
+  line-height: 1.3;
   margin: 1.8em 0;
   color: #6e3333;
 }
@@ -142,7 +147,7 @@ a:focus-visible, button:focus-visible {
   .sketch path, .sketch circle, .sketch ellipse { animation: none; }
 }
 
-/* Bodoni sets wide; pull display type in a touch so it reads like the logo. */
-.font-display { letter-spacing: -0.01em; font-weight: 600; }
-/* Bodoni hairlines vanish at small sizes: below ~28px use the body face instead. */
+/* Abril Fatface ships one weight; anything heavier would only be faux-bolded. */
+.font-display { letter-spacing: -0.01em; font-weight: 400; }
+/* Below ~28px use the body face for headings; the serif is for big type only. */
 .font-display-sm { font-family: Karla, system-ui, sans-serif; font-weight: 600; letter-spacing: -0.01em; }

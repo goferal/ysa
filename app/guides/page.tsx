@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { rosters, type Category } from '@/site.config';
 import { getGuides } from '@/lib/content';
-import { Washes, Cta } from '@/components/Chrome';
+import { Cta, card } from '@/components/Chrome';
 import { MagazineCover } from '@/components/Magazine';
 import { Squiggle } from '@/components/Sketches';
 
@@ -19,7 +19,6 @@ export default function Guides() {
 
   return (
     <div className="relative overflow-hidden">
-      <Washes variant="quiet" />
       <section className="mx-auto max-w-6xl px-6 pb-6 pt-14 md:px-10 md:pt-20">
         <div className="grid items-end gap-10 md:grid-cols-[1.3fr_0.7fr]">
           <div>
@@ -64,10 +63,12 @@ export default function Guides() {
                       {have.map((t, i) => {
                         const g = bySlug.get(t.slug)!;
                         return (
-                          <li key={t.slug} className="w-36">
-                            <Link href={`/guides/${g.slug}/`} className={`block text-[11px] transition-transform hover:-translate-y-1 ${i % 2 ? 'rotate-1' : '-rotate-1'}`}>
-                              <MagazineCover guide={g} index={i} />
-                              <p className="mt-3 font-display-sm text-xl leading-tight">{t.name}</p>
+                          <li key={t.slug} className={`${card} w-52 p-5`}>
+                            <Link href={`/guides/${g.slug}/`} className="group block text-[11px]">
+                              <div className={`mx-auto w-36 transition-transform group-hover:-translate-y-1 ${i % 2 ? 'rotate-1' : '-rotate-1'}`}>
+                                <MagazineCover guide={g} index={i} />
+                              </div>
+                              <p className="mt-4 font-display-sm text-xl leading-tight group-hover:text-soft">{t.name}</p>
                               <p className="text-sm text-soft">${g.price} · {g.pages} pages</p>
                             </Link>
                           </li>

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getPosts, getPost, renderMarkdown, formatDate } from '@/lib/content';
-import { Washes, Cta } from '@/components/Chrome';
+import { Cta } from '@/components/Chrome';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -29,7 +29,6 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <div className="relative overflow-hidden">
-      <Washes variant="quiet" />
       <article className="mx-auto max-w-6xl px-6 pb-8 pt-16 md:px-10 md:pt-24">
         <Link href="/blog/" className="text-[15px] text-soft hover:text-ink">
           ← All posts

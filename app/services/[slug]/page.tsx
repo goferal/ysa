@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { site, services, formatPrice } from '@/site.config';
-import { Washes, Cta } from '@/components/Chrome';
+import { Cta } from '@/components/Chrome';
 import { Star, Squiggle } from '@/components/Sketches';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -27,7 +27,6 @@ export default async function ServicePage({ params }: Props) {
 
   return (
     <div className="relative overflow-hidden">
-      <Washes variant="quiet" />
       <article className="mx-auto max-w-6xl px-6 pb-8 pt-14 md:px-10 md:pt-20">
         <Link href="/services/" className="text-[15px] text-soft hover:text-ink">
           ← All consulting services
