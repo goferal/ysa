@@ -3,9 +3,10 @@
 import { createElement, useEffect, useRef, type ReactNode } from 'react';
 
 /**
- * Fades and lifts its children in the first time they scroll into view.
- * The hidden state only applies once <html> has the `js` class (set in layout),
- * so crawlers and no-JS readers see everything immediately.
+ * Lifts its children in the first time they scroll into view.
+ * Nothing is hidden until this has mounted, and blocks already on screen at
+ * mount are left alone, so crawlers, no-JS readers, and the first screen never
+ * wait on an observer.
  */
 export function Reveal({
   children,
@@ -22,10 +23,9 @@ export function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      el.classList.add('is-in');
-      return;
-    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return;
+    el.classList.add('armed');
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

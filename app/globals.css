@@ -155,13 +155,13 @@ a:focus-visible, button:focus-visible {
 /* Headings are near-black like the logo; body copy stays maroon. Zero specificity so utilities (text-mist on the band) win. */
 :where(.font-display) { color: #171212; }
 
-/* Motion, all of it CSS. Content is hidden only under html.js (set in layout) and shown by Reveal. */
-.js .reveal {
+/* Motion, all of it CSS. Reveal arms a block (hides it) only after mount and only below the fold. */
+.reveal.armed {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.js .reveal.is-in { opacity: 1; transform: none; }
+.reveal.armed.is-in { opacity: 1; transform: none; }
 
 /* Hero words rise out of a mask on load. Padding keeps descenders inside the mask. */
 .rise { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: 0.12em; margin-bottom: -0.12em; }
@@ -171,7 +171,7 @@ a:focus-visible, button:focus-visible {
   to   { transform: none; opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal.armed { opacity: 1; transform: none; transition: none; }
   .rise > span { animation: none; }
 }
 /* Below ~28px use the body face for headings; the serif is for big type only. */
