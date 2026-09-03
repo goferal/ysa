@@ -4,6 +4,7 @@ import { getPosts, getGuides } from '@/lib/content';
 import { Cta, Kicker, Ticker, sheet } from '@/components/Chrome';
 import { MagazineStack, type SoonEntry } from '@/components/Magazine';
 import { Quiz } from '@/components/Quiz';
+import { Reveal } from '@/components/Reveal';
 import { DressForm, SwatchFan, Thread, QuoteMark, Star } from '@/components/Sketches';
 
 /** Covers that fill the fan until their guides exist: one of each kind. */
@@ -11,6 +12,15 @@ const soon: SoonEntry[] = [
   { name: 'Soft Dramatic', kind: 'kibbe' },
   { name: 'Romantic', kind: 'essence' },
   { name: 'Autumn', kind: 'season' },
+];
+
+const heroWords = ['Dress', 'for', 'you,', 'not', 'the', 'trends.'];
+
+/** The three lenses, as cards that stack up as you scroll. */
+const lenses = [
+  { n: '01', title: 'Kibbe body type', line: 'Your lines.', text: 'Which silhouettes fall into place, and why that blazer never sat right.', slug: 'kibbe-body-type-analysis', Sketch: DressForm, tint: 'bg-white' },
+  { n: '02', title: 'Style essences', line: 'Your mood.', text: 'The details that feel like you instead of a costume.', slug: 'style-essence-analysis', Sketch: Thread, tint: 'bg-cream' },
+  { n: '03', title: 'Color season', line: 'Your coloring.', text: 'The palette that makes you look rested and awake.', slug: 'color-season-analysis', Sketch: SwatchFan, tint: 'bg-[#FFF0F0]' },
 ];
 
 const coverLines = [
@@ -35,8 +45,20 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 pb-14 pt-12 md:px-10 md:pb-20 md:pt-20">
         <p className="kicker text-ink/70">Confused about your style? Let us help.</p>
         <div className="relative mt-5">
-          <h1 className="font-display text-[3.4rem] leading-[0.95] tracking-tight md:text-[6.5rem] lg:text-[7.5rem] [text-wrap:balance]">
-            Dress for <span className="hl">you</span>, not the trends.
+          <h1 className="font-display text-[3.4rem] leading-[1] md:text-[5.75rem] lg:text-[6.5rem] [text-wrap:balance]">
+            {heroWords.map((w, i) => (
+              <span key={w} className="rise">
+                <span style={{ animationDelay: `${i * 70}ms` }}>
+                  {w === 'you,' ? (
+                    <>
+                      <span className="hl">you</span>,
+                    </>
+                  ) : (
+                    w
+                  )}
+                </span>{' '}
+              </span>
+            ))}
           </h1>
           <DressForm className="pointer-events-none absolute -right-2 -top-8 hidden w-24 text-ink/50 lg:block" />
         </div>
@@ -53,23 +75,42 @@ export default function Home() {
 
       {/* 01 The idea */}
       <section id="idea" className="mx-auto max-w-6xl scroll-mt-6 px-6 py-14 md:px-10 md:py-20">
-        <Kicker n="01">The idea</Kicker>
-        <p className="mt-6 max-w-3xl font-display text-[1.75rem] leading-[1.15] md:text-[2.5rem] [text-wrap:balance]">
-          Your Style Archetype <span className="font-hand text-[0.6em] text-soft">(n.)</span> the trio of your Kibbe body
-          type, your Kitchener style essences, and your color season, read together.
-        </p>
-        <p className="mt-3 font-hand text-xl text-soft">yes, we coined it</p>
-        <div className="mt-12 grid gap-10 border-t border-ink/15 pt-10 md:grid-cols-3">
-          <Lens sketch={<DressForm className="h-16 text-ink/60" />} title="Kibbe body type" text="your lines" href="/services/kibbe-body-type-analysis/" />
-          <Lens sketch={<Thread className="h-16 text-ink/60" />} title="Style essences" text="your mood" href="/services/style-essence-analysis/" />
-          <Lens sketch={<SwatchFan className="h-16 text-ink/60" />} title="Color season" text="your coloring" href="/services/color-season-analysis/" />
+        <Reveal>
+          <Kicker n="01">The idea</Kicker>
+          <p className="mt-6 max-w-3xl font-display text-[1.75rem] leading-[1.15] md:text-[2.5rem] [text-wrap:balance]">
+            Your Style Archetype <span className="font-hand text-[0.6em] text-soft">(n.)</span> the trio of your Kibbe body
+            type, your Kitchener style essences, and your color season, read together.
+          </p>
+          <p className="mt-3 font-hand text-xl text-soft">yes, we coined it</p>
+        </Reveal>
+        <div className="mt-12">
+          {lenses.map((l, i) => {
+            const s = services.find((x) => x.slug === l.slug)!;
+            return (
+              <div key={l.n} className="sticky mb-6" style={{ top: 88 + i * 20 }}>
+                <article className={`grid items-center gap-8 rounded-[4px] p-8 shadow-sheet ring-1 ring-ink/10 md:grid-cols-[0.8fr_1.4fr] md:p-12 ${l.tint}`}>
+                  <l.Sketch className="mx-auto h-40 w-auto text-ink/60 md:h-56" />
+                  <div>
+                    <p className="kicker text-ink/60">
+                      {l.n} · {l.title}
+                    </p>
+                    <h3 className="mt-3 font-display text-[2rem] leading-[1.05] md:text-[3rem]">{l.line}</h3>
+                    <p className="mt-3 max-w-prose text-soft">{l.text}</p>
+                    <Link href={`/services/${s.slug}/`} className="ul-hand mt-5 inline-block text-[15px] font-medium">
+                      {s.name} · {formatPrice(s)}
+                    </Link>
+                  </div>
+                </article>
+              </div>
+            );
+          })}
         </div>
       </section>
 
       {/* 02 Consulting, laid out like a contents page */}
       <section id="consulting" className="mx-auto max-w-6xl scroll-mt-6 px-6 py-14 md:px-10 md:py-20">
         <Kicker n="02">Consulting</Kicker>
-        <div className={`${sheet} mt-6`}>
+        <Reveal className={`${sheet} mt-6`}>
           <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
             <h2 className="font-display text-[2rem] leading-tight md:text-[3rem] [text-wrap:balance]">Pick the question you&rsquo;re stuck on.</h2>
             <p className="font-hand text-xl text-ink/80">written, delivered in about a week</p>
@@ -97,7 +138,7 @@ export default function Home() {
               Every consult, explained
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* 03 The handbooks, on a maroon band */}
@@ -107,8 +148,8 @@ export default function Home() {
             The handbooks
           </Kicker>
           <div className="mt-8 grid items-center gap-12 md:grid-cols-2 md:gap-16">
-            <div>
-              <h2 className="font-display text-[2.2rem] leading-[1.05] md:text-[3.5rem] [text-wrap:balance]">
+            <Reveal>
+              <h2 className="font-display text-[2.2rem] leading-[1.05] text-mist md:text-[3.5rem] [text-wrap:balance]">
                 Already know your type? Take the handbook.
               </h2>
               <p className="mt-5 font-hand text-2xl text-blush/90">one per type, essence, and season. yours forever.</p>
@@ -120,8 +161,10 @@ export default function Home() {
                   Fashion guides
                 </Link>
               </div>
-            </div>
-            <MagazineStack guides={guides} soon={soon} />
+            </Reveal>
+            <Reveal delay={150}>
+              <MagazineStack guides={guides} soon={soon} />
+            </Reveal>
           </div>
         </div>
       </section>
@@ -129,7 +172,7 @@ export default function Home() {
       {/* 04 The quiz */}
       <section id="quiz" className="mx-auto max-w-6xl scroll-mt-6 px-6 py-14 md:px-10 md:py-20">
         <Kicker n="04">The quiz</Kicker>
-        <div className={`${sheet} mt-6`}>
+        <Reveal className={`${sheet} mt-6`}>
           <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
             <div>
               <h2 className="font-display text-[2rem] leading-tight md:text-[2.75rem] [text-wrap:balance]">Which archetype might you be?</h2>
@@ -137,13 +180,13 @@ export default function Home() {
             </div>
             <Quiz guideSlugs={guides.map((g) => g.slug)} />
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* 05 Kind words · 06 From the notes */}
       <section id="reviews" className="mx-auto max-w-6xl scroll-mt-6 px-6 py-14 md:px-10 md:py-20">
         <div className="grid gap-14 md:grid-cols-2 md:gap-16">
-          <div>
+          <Reveal>
             <Kicker n="05">Kind words</Kicker>
             <figure className="relative mt-8 pt-8">
               <QuoteMark className="absolute left-0 top-0 w-10 text-ink/40" />
@@ -154,9 +197,9 @@ export default function Home() {
                 — {quote.name}, <span className="text-soft">{quote.detail}</span>
               </figcaption>
             </figure>
-          </div>
+          </Reveal>
           {latest && (
-            <div>
+            <Reveal delay={120}>
               <Kicker n="06">From the notes</Kicker>
               <h2 className="mt-8 font-display text-[1.6rem] leading-[1.2] md:text-[2.1rem] [text-wrap:balance]">
                 <Link href={`/blog/${latest.slug}/`} className="hover:text-soft">
@@ -171,14 +214,14 @@ export default function Home() {
                   All posts
                 </Link>
               </div>
-            </div>
+            </Reveal>
           )}
         </div>
       </section>
 
       {/* Close */}
       <section className="mx-auto max-w-6xl px-6 pb-8 pt-4 md:px-10">
-        <div className="border-t border-ink/15 pt-12 md:pt-16">
+        <Reveal className="border-t border-ink/15 pt-12 md:pt-16">
           <h2 className="font-display text-[2.4rem] leading-[1] md:text-[4.5rem] [text-wrap:balance]">Still guessing? Let&rsquo;s stop that.</h2>
           <div className="mt-8 flex flex-wrap items-center gap-6">
             <Cta href={`/services/${ysa.slug}/`}>Get Your Style Archetype</Cta>
@@ -189,18 +232,8 @@ export default function Home() {
               </a>
             </p>
           </div>
-        </div>
+        </Reveal>
       </section>
     </div>
-  );
-}
-
-function Lens({ sketch, title, text, href }: { sketch: React.ReactNode; title: string; text: string; href: string }) {
-  return (
-    <Link href={href} className="group block">
-      <div className="h-16">{sketch}</div>
-      <h3 className="mt-4 text-lg font-semibold group-hover:text-soft">{title}</h3>
-      <p className="mt-1 font-hand text-xl text-soft">{text}</p>
-    </Link>
   );
 }

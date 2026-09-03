@@ -98,8 +98,10 @@ body {
   line-height: 1.75;
 }
 .prose-ysa h2 {
-  font-family: 'Abril Fatface', 'Bodoni 72', Georgia, serif;
-  font-weight: 400;
+  font-family: Fraunces, 'Bodoni 72', Georgia, serif;
+  font-weight: 500;
+  font-variation-settings: 'SOFT' 50, 'WONK' 1;
+  color: #171212;
   font-size: 2rem;
   line-height: 1.15;
   margin: 2.4em 0 0.6em;
@@ -117,7 +119,8 @@ body {
 .prose-ysa li::marker { color: #4b1212; }
 .prose-ysa a { color: #4b1212; text-decoration: underline; text-underline-offset: 3px; }
 .prose-ysa blockquote {
-  font-family: 'Abril Fatface', 'Bodoni 72', Georgia, serif;
+  font-family: Fraunces, 'Bodoni 72', Georgia, serif;
+  font-style: italic;
   font-size: 1.5rem;
   line-height: 1.3;
   margin: 1.8em 0;
@@ -147,7 +150,29 @@ a:focus-visible, button:focus-visible {
   .sketch path, .sketch circle, .sketch ellipse { animation: none; }
 }
 
-/* Abril Fatface ships one weight; anything heavier would only be faux-bolded. */
-.font-display { letter-spacing: -0.01em; font-weight: 400; }
+/* Fraunces: medium weight, soft serifs, the wonky alternates on. Optical size follows font-size. */
+.font-display { letter-spacing: -0.02em; font-weight: 500; font-variation-settings: 'SOFT' 50, 'WONK' 1; }
+/* Headings are near-black like the logo; body copy stays maroon. Zero specificity so utilities (text-mist on the band) win. */
+:where(.font-display) { color: #171212; }
+
+/* Motion, all of it CSS. Content is hidden only under html.js (set in layout) and shown by Reveal. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.js .reveal.is-in { opacity: 1; transform: none; }
+
+/* Hero words rise out of a mask on load. Padding keeps descenders inside the mask. */
+.rise { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+.rise > span { display: inline-block; animation: rise 1s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes rise {
+  from { transform: translateY(110%); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .rise > span { animation: none; }
+}
 /* Below ~28px use the body face for headings; the serif is for big type only. */
 .font-display-sm { font-family: Karla, system-ui, sans-serif; font-weight: 600; letter-spacing: -0.01em; }

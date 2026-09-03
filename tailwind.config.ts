@@ -9,7 +9,8 @@ export default {
         mist: '#FFFDFB',      // page ground: warm paper white
         blush: '#FFE5E5',     // brand blush: an accent (covers, ticker, the maroon band's text), not a ground
         rose: '#FFC9C9',      // deeper blush for covers
-        ink: '#4B1212',       // brand maroon: text, the maroon band, and the one button
+        noir: '#171212',      // near-black, matches the logo: all display headings
+        ink: '#4B1212',       // brand maroon: body text, the maroon band, and the one button
         soft: '#8A5555',      // muted text, maroon at reduced strength
         mulberry: '#4B1212',  // kept as an alias so older classes still work
         honey: '#F3D48A',     // marker highlight
@@ -18,7 +19,7 @@ export default {
         sky: '#FFE5E5',
       },
       fontFamily: {
-        display: ['"Abril Fatface"', '"Bodoni 72"', 'Georgia', 'serif'],
+        display: ['Fraunces', '"Bodoni 72"', 'Georgia', 'serif'],
         body: ['Karla', 'system-ui', 'sans-serif'],
         hand: ['Caveat', 'cursive'],
         'display-sm': ['Karla', 'system-ui', 'sans-serif'],

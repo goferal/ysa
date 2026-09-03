@@ -78,7 +78,7 @@ export function Footer() {
 export function Kicker({ n, children, tone = 'ink' }: { n?: string; children: React.ReactNode; tone?: 'ink' | 'light' }) {
   return (
     <p className={`kicker flex items-center gap-3 ${tone === 'light' ? 'text-blush/80' : 'text-ink/70'}`}>
-      {n && <span className="font-display text-base normal-case tracking-normal">{n}</span>}
+      {n && <span className="font-display text-base normal-case tracking-normal text-inherit">{n}</span>}
       <span aria-hidden="true" className="h-px w-8 bg-current opacity-60" />
       <span>{children}</span>
     </p>
@@ -131,7 +131,7 @@ export function Cta({
 }) {
   const cls = {
     ink: 'bg-ink text-mist hover:bg-soft',
-    soft: 'bg-transparent text-ink ring-1 ring-ink/25 hover:ring-ink hover:text-soft',
+    soft: 'bg-blush text-ink hover:bg-rose',
     blush: 'bg-blush text-ink hover:bg-mist',
   }[tone];
   const className = `inline-flex items-center gap-2 rounded-full px-6 py-3 font-body text-[15px] font-medium tracking-wide transition-colors ${cls}`;
