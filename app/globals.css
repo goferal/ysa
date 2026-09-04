@@ -100,7 +100,7 @@ body {
 .prose-ysa h2 {
   font-family: Fraunces, 'Bodoni 72', Georgia, serif;
   font-weight: 500;
-  font-variation-settings: 'SOFT' 50, 'WONK' 1;
+  font-variation-settings: 'SOFT' 50, 'WONK' 0;
   color: #171212;
   font-size: 2rem;
   line-height: 1.15;
@@ -150,8 +150,8 @@ a:focus-visible, button:focus-visible {
   .sketch path, .sketch circle, .sketch ellipse { animation: none; }
 }
 
-/* Fraunces: medium weight, soft serifs, the wonky alternates on. Optical size follows font-size. */
-.font-display { letter-spacing: -0.02em; font-weight: 500; font-variation-settings: 'SOFT' 50, 'WONK' 1; }
+/* Fraunces: medium weight, soft serifs, wonky alternates off (WONK 1 looked like bad kerning at hero size). Optical size follows font-size. */
+.font-display { letter-spacing: -0.01em; font-weight: 500; font-variation-settings: 'SOFT' 50, 'WONK' 0; }
 /* Headings are near-black like the logo; body copy stays maroon. Zero specificity so utilities (text-mist on the band) win. */
 :where(.font-display) { color: #171212; }
 
