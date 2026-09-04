@@ -45,7 +45,7 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 pb-14 pt-12 md:px-10 md:pb-20 md:pt-20">
         <p className="kicker text-ink/70">Confused about your style? Let us help.</p>
         <div className="mt-5 grid items-end gap-10 lg:grid-cols-[1fr_auto]">
-          <h1 className="max-w-3xl font-display text-[3.2rem] leading-[1.06] md:text-[5.25rem] lg:text-[6rem] [text-wrap:balance]">
+          <h1 className="max-w-2xl font-display text-[3.2rem] leading-[1.08] md:text-[5.25rem] lg:text-[6rem] [text-wrap:balance]">
             {heroWords.map((w, i) => (
               <span key={w} className="rise">
                 <span style={{ animationDelay: `${i * 70}ms` }}>
@@ -60,7 +60,7 @@ export default function Home() {
               </span>
             ))}
           </h1>
-          <DressForm className="hidden w-36 justify-self-end text-ink/50 lg:block" />
+          <DressForm className="hidden w-44 justify-self-end text-ink/50 lg:block" />
         </div>
         <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
           <Cta href={`/services/${ysa.slug}/`}>Get Your Style Archetype · {formatPrice(ysa)}</Cta>
@@ -222,7 +222,7 @@ export default function Home() {
       {/* Close */}
       <section className="mx-auto max-w-6xl px-6 pb-8 pt-4 md:px-10">
         <Reveal className="border-t border-ink/15 pt-12 md:pt-16">
-          <h2 className="max-w-4xl font-display text-[2.4rem] leading-[1.06] md:text-[4.25rem] [text-wrap:balance]">Still guessing? Let&rsquo;s stop that.</h2>
+          <h2 className="max-w-3xl font-display text-[2.4rem] leading-[1.08] md:text-[4.25rem] [text-wrap:balance]">Still guessing? Let&rsquo;s stop that.</h2>
           <div className="mt-8 flex flex-wrap items-center gap-6">
             <Cta href={`/services/${ysa.slug}/`}>Get Your Style Archetype</Cta>
             <p className="text-soft">
